@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Office 临时锁文件（打开 xlsx 时自动生成）
+~$*
+.~lock.*
+
+# 常见编辑器临时文件
+*.swp
+*.tmp
