@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>商家客服 AI Agent Demo</title>
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #66717d;
+      --line: #d9dee4;
+      --paper: #f5f7f9;
+      --white: #ffffff;
+      --navy: #18324b;
+      --teal: #087f7b;
+      --teal-soft: #e5f4f2;
+      --amber: #9a6810;
+      --amber-soft: #fff5d9;
+      --red: #a63d38;
+      --red-soft: #fbeceb;
+      --shadow: 0 8px 22px rgba(23, 33, 43, .07);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: var(--paper); }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+
+    .topbar {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      color: #fff;
+      background: var(--navy);
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-mark {
+      width: 30px; height: 30px; display: grid; place-items: center;
+      background: #f0b64f; color: var(--navy); font-weight: 800; border-radius: 6px;
+    }
+    .brand h1 { font-size: 17px; margin: 0; font-weight: 650; letter-spacing: 0; }
+    .top-meta { display: flex; align-items: center; gap: 16px; color: #d8e2ea; font-size: 13px; }
+    .mode { border: 1px solid rgba(255,255,255,.3); padding: 6px 10px; border-radius: 4px; }
+
+    .layout {
+      width: min(1480px, calc(100% - 48px));
+      margin: 24px auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(330px, .85fr);
+      gap: 20px;
+      align-items: start;
+    }
+    .panel { background: var(--white); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .panel-head { min-height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+    .panel-head h2 { margin: 0; font-size: 15px; font-weight: 700; }
+    .panel-head p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
+
+    .chat-panel { min-height: 720px; display: flex; flex-direction: column; }
+    .session-bar { display: flex; align-items: center; justify-content: space-between; padding: 10px 18px; background: #fafbfc; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .session-bar button { border: 0; background: transparent; color: var(--teal); padding: 0; }
+    .messages { flex: 1; min-height: 420px; padding: 20px; overflow: auto; }
+    .message { display: flex; margin: 0 0 18px; gap: 10px; }
+    .message.user { justify-content: flex-end; }
+    .avatar { width: 30px; height: 30px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; font-size: 12px; font-weight: 700; }
+    .avatar.agent { background: var(--teal-soft); color: var(--teal); }
+    .avatar.user { background: #edf0f3; color: var(--navy); }
+    .bubble { max-width: min(76%, 570px); padding: 12px 14px; border: 1px solid var(--line); background: #fbfcfd; line-height: 1.65; font-size: 14px; }
+    .user .bubble { background: var(--navy); border-color: var(--navy); color: #fff; }
+    .bubble strong { display: block; margin-bottom: 3px; font-size: 13px; }
+    .bubble .label { color: var(--muted); font-size: 12px; }
+    .user .bubble .label { color: #cbd8e2; }
+    .composer { border-top: 1px solid var(--line); padding: 14px 18px 18px; }
+    .suggestions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .suggestions button { padding: 7px 10px; color: var(--navy); background: #f4f6f8; border: 1px solid var(--line); border-radius: 4px; font-size: 12px; text-align: left; }
+    .suggestions button:hover { border-color: var(--teal); color: var(--teal); }
+    .input-row { display: flex; gap: 10px; }
+    .input-row input { flex: 1; min-width: 0; height: 42px; padding: 0 12px; border: 1px solid #bbc4cd; border-radius: 4px; outline: none; }
+    .input-row input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(8,127,123,.12); }
+    .primary { height: 42px; padding: 0 18px; border: 1px solid var(--teal); border-radius: 4px; background: var(--teal); color: #fff; font-weight: 650; }
+    .primary:hover { background: #066d6a; }
+
+    .right-column { display: grid; gap: 20px; }
+    .result { padding: 18px; }
+    .result-status { display: flex; align-items: center; gap: 9px; margin-bottom: 14px; }
+    .status-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--teal); }
+    .status-dot.warn { background: #d08a1d; }
+    .status-dot.danger { background: var(--red); }
+    .result-status h3 { margin: 0; font-size: 18px; }
+    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .result-block { padding: 12px; background: #fafbfc; border-left: 3px solid var(--line); }
+    .result-block h4 { margin: 0 0 5px; color: var(--muted); font-size: 12px; font-weight: 650; }
+    .result-block p { margin: 0; line-height: 1.6; font-size: 13px; }
+    .result-block.wide { grid-column: 1 / -1; }
+    .action-area { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+    .action-area.show { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .action-area p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .refund-button { flex: 0 0 auto; min-height: 38px; padding: 0 16px; border: 1px solid var(--teal); border-radius: 4px; background: var(--teal); color: #fff; font-weight: 650; }
+    .refund-button:hover { background: #066d6a; }
+    .refund-button:disabled { border-color: #aeb8c2; background: #aeb8c2; cursor: default; }
+    .handoff { display: none; margin-top: 14px; padding: 12px; background: var(--amber-soft); border: 1px solid #ead59c; color: #654812; font-size: 13px; line-height: 1.6; }
+    .handoff.show { display: block; }
+    .handoff strong { display: block; margin-bottom: 4px; }
+
+    .trace { padding-bottom: 8px; }
+    .trace-summary { display: flex; gap: 8px; padding: 14px 18px 4px; flex-wrap: wrap; }
+    .metric { min-width: 100px; padding: 9px 10px; border: 1px solid var(--line); background: #fafbfc; }
+    .metric span { display: block; color: var(--muted); font-size: 11px; }
+    .metric strong { display: block; margin-top: 3px; font-size: 15px; }
+    .timeline { list-style: none; padding: 10px 18px 8px; margin: 0; }
+    .timeline li { position: relative; display: grid; grid-template-columns: 12px 1fr auto; gap: 10px; padding: 8px 0 12px; }
+    .timeline li:not(:last-child)::before { content: ""; position: absolute; left: 5px; top: 18px; bottom: -2px; border-left: 1px solid var(--line); }
+    .timeline .point { width: 10px; height: 10px; margin-top: 3px; border-radius: 50%; background: var(--teal); z-index: 1; }
+    .timeline .point.gray { background: #aeb8c2; }
+    .event-title { font-size: 13px; font-weight: 650; }
+    .event-detail { margin-top: 2px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .event-time { color: var(--muted); font-size: 11px; white-space: nowrap; }
+
+    .scenario-panel { padding-bottom: 14px; }
+    .scenario-list { display: grid; gap: 8px; padding: 14px 18px 0; }
+    .scenario { display: flex; align-items: flex-start; gap: 10px; width: 100%; padding: 10px 11px; border: 1px solid var(--line); background: #fff; text-align: left; }
+    .scenario:hover { border-color: var(--teal); background: #f8fcfb; }
+    .scenario .tag { display: inline-block; min-width: 52px; color: var(--teal); font-size: 11px; font-weight: 700; }
+    .scenario span:last-child { color: var(--ink); font-size: 12px; line-height: 1.45; }
+
+    .footnote { width: min(1480px, calc(100% - 48px)); margin: -10px auto 24px; color: var(--muted); font-size: 12px; }
+    @media (max-width: 940px) {
+      .layout { grid-template-columns: 1fr; }
+      .chat-panel { min-height: 660px; }
+    }
+    @media (max-width: 560px) {
+      .topbar { height: auto; padding: 14px 16px; align-items: flex-start; gap: 12px; }
+      .top-meta { display: block; text-align: right; font-size: 11px; }
+      .top-meta .mode { margin-top: 5px; }
+      .layout, .footnote { width: calc(100% - 24px); margin-top: 12px; }
+      .result-grid { grid-template-columns: 1fr; }
+      .result-block.wide { grid-column: auto; }
+      .bubble { max-width: 86%; }
+      .input-row { flex-direction: column; }
+      .primary { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">AI</div>
+      <h1>商家客服 AI Agent Demo</h1>
+    </div>
+    <div class="top-meta">
+      <span>模拟环境 · 只读</span>
+      <span class="mode">单 Agent / 本地工具</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel chat-panel" aria-label="消费者聊天">
+      <div class="panel-head">
+        <div>
+          <h2>消费者会话</h2>
+          <p>咨询未发货或已发货未签收订单的退款/退货资格</p>
+        </div>
+        <span class="mode" style="color: var(--teal); border-color: #b8dedb; background: var(--teal-soft);">在线</span>
+      </div>
+      <div class="session-bar">
+        <span>登录用户：<strong>u_001</strong>　会话：<strong id="session-id">s-demo-001</strong></span>
+        <button type="button" id="reset-btn">新建会话</button>
+      </div>
+      <div class="messages" id="messages" aria-live="polite">
+        <div class="message">
+          <div class="avatar agent">AI</div>
+          <div class="bubble">
+            <strong>客服 Agent</strong>
+            您好，我可以帮您查询退款/退货资格。请告诉我订单号，或直接描述您遇到的问题。
+          </div>
+        </div>
+      </div>
+      <div class="composer">
+        <div class="suggestions" aria-label="演示场景">
+          <button type="button" data-message="订单还没发货，可以退款吗？订单号是 o_1001">未发货普通商品</button>
+          <button type="button" data-message="这单已经发货但还没收到，能退吗？订单号 o_1002">已发货未签收</button>
+          <button type="button" data-message="我想换货，订单号是 o_1001">换货请求</button>
+          <button type="button" data-message="帮我查一下订单 o_2001 能不能退">越权订单</button>
+          <button type="button" data-message="我没有订单号，但我想退款">缺少订单号</button>
+        </div>
+        <form class="input-row" id="chat-form">
+          <input id="message-input" autocomplete="off" placeholder="例如：订单 o_1001 还没发货，可以退款吗？" aria-label="输入消息">
+          <button class="primary" type="submit">发送消息</button>
+        </form>
+      </div>
+    </section>
+
+    <aside class="right-column">
+      <section class="panel" aria-label="结构化结果">
+        <div class="panel-head">
+          <div>
+            <h2>结构化结果</h2>
+            <p>消费者回答由以下字段组织</p>
+          </div>
+          <span id="trace-id" style="color: var(--muted); font-size: 11px;">tr_demo_001</span>
+        </div>
+        <div class="result">
+          <div class="result-status">
+            <span class="status-dot" id="status-dot"></span>
+            <h3 id="eligibility-title">暂时无法判断</h3>
+          </div>
+          <div class="result-grid">
+            <div class="result-block"><h4>识别意图</h4><p id="intent-value">等待输入</p></div>
+            <div class="result-block"><h4>置信度</h4><p id="confidence-value">-</p></div>
+            <div class="result-block wide"><h4>依据</h4><p id="evidence-value">尚未执行订单、物流、售后查询。</p></div>
+            <div class="result-block wide"><h4>下一步</h4><p id="next-action">请输入一个演示场景开始。</p></div>
+          </div>
+          <div class="action-area" id="action-area">
+            <p id="action-note">该订单符合“已支付、未发货”的退款条件。</p>
+            <button class="refund-button" id="refund-button" type="button">申请退款</button>
+          </div>
+          <div class="handoff" id="handoff-box">
+            <strong>需要人工接管</strong>
+            <span id="handoff-value"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel trace" aria-label="Agent trace">
+        <div class="panel-head">
+          <div>
+            <h2>Agent 执行 Trace</h2>
+            <p>展示本次请求经过的模块和结果</p>
+          </div>
+          <span style="color: var(--teal); font-size: 12px;">可观测</span>
+        </div>
+        <div class="trace-summary">
+          <div class="metric"><span>总耗时</span><strong id="latency">-</strong></div>
+          <div class="metric"><span>追问次数</span><strong id="questions">0 / 2</strong></div>
+          <div class="metric"><span>工具调用</span><strong id="tool-count">0</strong></div>
+          <div class="metric"><span>政策版本</span><strong id="policy-version">-</strong></div>
+        </div>
+        <ol class="timeline" id="timeline">
+          <li><span class="point gray"></span><div><div class="event-title">等待请求</div><div class="event-detail">输入消息后显示执行过程</div></div><span class="event-time">-</span></li>
+        </ol>
+      </section>
+
+      <section class="panel scenario-panel" aria-label="演示场景">
+        <div class="panel-head">
+          <div><h2>固定演示路径</h2><p>用于快速体验主链路和异常降级</p></div>
+        </div>
+        <div class="scenario-list">
+          <button class="scenario" type="button" data-message="订单还没发货，可以退款吗？订单号是 o_1001"><span class="tag">正常</span><span>未发货普通商品：符合退款资格</span></button>
+          <button class="scenario" type="button" data-message="这单已经发货但还没收到，能退吗？订单号 o_1002"><span class="tag">正常</span><span>已发货未签收：符合，生成售后草稿</span></button>
+          <button class="scenario" type="button" data-message="我想退定制礼盒，订单号 o_1003 可以吗？"><span class="tag">例外</span><span>特殊商品：按政策排除并转人工</span></button>
+          <button class="scenario" type="button" data-message="帮我查一下订单 o_2001 能不能退"><span class="tag">安全</span><span>越权订单：拒绝查询并转人工</span></button>
+          <button class="scenario" type="button" data-message="我没有订单号，但我想退款"><span class="tag">多轮</span><span>缺少订单号：追问并保留会话状态</span></button>
+        </div>
+      </section>
+    </aside>
+  </main>
+  <p class="footnote">这是前端模拟原型，不连接真实订单或支付系统；不会执行退款、改单、发券等写操作。</p>
+
+  <script>
+    const messages = document.querySelector('#messages');
+    const form = document.querySelector('#chat-form');
+    const input = document.querySelector('#message-input');
+    const timeline = document.querySelector('#timeline');
+    const sessionId = document.querySelector('#session-id');
+    let questionCount = 0;
+    let seq = 1;
+
+    const scenarios = {
+      normal_unshipped: {
+        match: /o_1001|没发货|未发货/,
+        intent: '退款/退货资格咨询', confidence: '0.98', title: '符合退款资格', tone: 'ok',
+        evidence: '订单 o_1001：已支付、未发货、普通商品；当前没有进行中的售后单。命中 policy_v1.0 / RULE-UNSHIPPED-PAID。',
+        next: '系统不会直接执行退款。可以为您生成一份待人工确认的售后申请。', handoff: '' , tools: 3
+      },
+      normal_shipped: {
+        match: /o_1002|已发货|没收到|未签收/,
+        intent: '退款/退货资格咨询', confidence: '0.96', title: '符合退款资格', tone: 'ok',
+        evidence: '订单 o_1002：已支付、已发货但未签收；物流状态正常；当前没有进行中的售后单。命中 policy_v1.0 / RULE-SHIPPED-NOT-RECEIVED。',
+        next: '可以生成待人工确认的售后草稿。当前原型不会直接执行退款或拦截物流。', handoff: '', tools: 3
+      },
+      special: {
+        match: /o_1003|定制|易腐|贴身|特殊商品/,
+        intent: '退款/退货资格咨询', confidence: '0.93', title: '暂时无法自动处理', tone: 'warn',
+        evidence: '商品被识别为定制商品，属于 policy_v1.0 的特殊商品例外。当前需要人工核对具体商品和售后政策。',
+        next: '我会把订单事实和政策版本交给人工客服继续处理。', handoff: '特殊商品例外，需要人工确认；系统没有给出自动退款承诺。', tools: 3
+      },
+      forbidden: {
+        match: /o_2001|越权|别人|他人/,
+        intent: '退款/退货资格咨询', confidence: '0.91', title: '无法查询该订单', tone: 'danger',
+        evidence: '订单 o_2001 与当前登录用户 u_001 不匹配。系统已停止订单、物流和售后查询，未泄露订单信息。',
+        next: '请确认您登录的是订单本人账号；如需继续处理，我可以为您转人工。', handoff: '身份与订单归属校验未通过（forbidden）。', tools: 1
+      },
+      missing: {
+        match: /没有订单号|无订单号|不知道订单号|哪一单/,
+        intent: '退款/退货资格咨询', confidence: '0.88', title: '需要补充订单信息', tone: 'warn',
+        evidence: '当前消息中没有可用订单号，系统尚未查询业务事实。',
+        next: '请提供订单号；也可以从当前账号最近订单中选择。最多追问 2 次，第 3 次将转人工。', handoff: '', tools: 0
+      },
+      exchange: {
+        match: /换货|换一个|换尺码/,
+        intent: '换货请求', confidence: '0.97', title: '需要人工处理', tone: 'warn',
+        evidence: '已识别为换货请求。第一版只识别换货意图，不自动执行换货或补发。',
+        next: '我可以为您转人工客服，并附上当前会话摘要。', handoff: '换货不在第一版自动处理范围内。', tools: 0
+      },
+      unknown: {
+        match: /.*/,
+        intent: '其他/无法识别', confidence: '0.61', title: '需要进一步说明', tone: 'warn',
+        evidence: '当前消息未能稳定匹配退款资格主流程，系统没有调用业务工具，也没有做资格承诺。',
+        next: '请说明您想查询退款资格、退款进度、物流异常，还是换货问题。', handoff: '', tools: 0
+      }
+    };
+
+    function pickScenario(text) {
+      return Object.values(scenarios).find(item => item.match.test(text)) || scenarios.unknown;
+    }
+
+    function addMessage(role, text, label = '') {
+      const row = document.createElement('div');
+      row.className = `message ${role}`;
+      row.innerHTML = role === 'user'
+        ? `<div class="bubble"><span class="label">${label || '您'}</span><br>${escapeHtml(text)}</div><div class="avatar user">您</div>`
+        : `<div class="avatar agent">AI</div><div class="bubble"><strong>客服 Agent</strong>${text}</div>`;
+      messages.appendChild(row);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function escapeHtml(value) {
+      return value.replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char]);
+    }
+
+    function setTimeline(item, id, trace = null) {
+      const events = trace?.events?.length
+        ? trace.events.map(event => [event.name, event.detail?.reason || event.detail?.mode || event.status, event.status === 'failed' ? 'failed' : event.status])
+        : [
+          ['orchestration', '接收请求并读取当前会话', 'completed'],
+          ['intent_classification', `意图：${item.intent}；置信度 ${item.confidence}`, 'completed'],
+        ];
+      if (!trace) {
+        if (item.tools > 0) {
+          events.push(['auth_check', item.tone === 'danger' ? 'user_id + order_id 校验失败：forbidden' : 'user_id + order_id 校验通过', item.tone === 'danger' ? 'failed' : 'completed']);
+        }
+        if (item.tools > 0 && item.tone !== 'danger') events.push(['policy_retrieval', '命中 policy_v1.0 及对应规则条款', 'completed']);
+        if (item.tools > 0 && item.tone !== 'danger') events.push(['read_only_tools', `查订单、查物流、查售后：${item.tools} 次只读调用`, 'completed']);
+        events.push(['response_rendering', item.handoff ? '生成消费者回答与人工交接摘要' : '生成结论—依据—下一步回答', 'completed']);
+      }
+      timeline.innerHTML = events.map(([name, detail, status], index) => `<li><span class="point ${status === 'failed' ? 'gray' : ''}"></span><div><div class="event-title">${name}</div><div class="event-detail">${detail}</div></div><span class="event-time">${index === 0 ? '0ms' : `${index * 42 + 18}ms`}</span></li>`).join('');
+      document.querySelector('#trace-id').textContent = id;
+      document.querySelector('#latency').textContent = trace?.total_elapsed_ms != null ? `${trace.total_elapsed_ms} ms` : `${events.length * 42 + 18} ms`;
+      const toolEvents = trace?.events?.filter(event => event.name.includes('tool')) || [];
+      document.querySelector('#tool-count').textContent = trace ? toolEvents.length : item.tools;
+      document.querySelector('#policy-version').textContent = item.policyVersion || (trace ? '-' : item.tools > 0 && item.tone !== 'danger' ? 'v1.0' : '-');
+    }
+
+    function updateResult(item, id, trace = null) {
+      const title = document.querySelector('#eligibility-title');
+      const dot = document.querySelector('#status-dot');
+      title.textContent = item.title;
+      dot.className = `status-dot ${item.tone === 'warn' ? 'warn' : item.tone === 'danger' ? 'danger' : ''}`;
+      document.querySelector('#intent-value').textContent = item.intent;
+      document.querySelector('#confidence-value').textContent = item.confidence;
+      document.querySelector('#evidence-value').textContent = item.evidence;
+      document.querySelector('#next-action').textContent = item.next;
+      const actionArea = document.querySelector('#action-area');
+      const refundButton = document.querySelector('#refund-button');
+      const canRequestRefund = item.canRequestRefund === true || item === scenarios.normal_unshipped;
+      actionArea.classList.toggle('show', canRequestRefund);
+      refundButton.disabled = false;
+      refundButton.textContent = '申请退款';
+      document.querySelector('#handoff-box').classList.toggle('show', Boolean(item.handoff));
+      document.querySelector('#handoff-value').textContent = item.handoff;
+      document.querySelector('#questions').textContent = `${questionCount} / 2`;
+      setTimeline(item, id, trace);
+    }
+
+    function renderApiResult(result, text) {
+      const response = result.response;
+      const trace = result.trace;
+      const evidence = response.evidence?.length
+        ? response.evidence.map(item => item.summary).join('；')
+        : '当前基础版本尚未接入业务事实查询。';
+      const item = {
+        intent: response.intent,
+        confidence: response.intent_confidence,
+        title: response.eligibility === 'eligible' ? '符合退款资格' : response.eligibility === 'ineligible' ? '不符合退款资格' : '暂时无法判断',
+        tone: response.need_human ? 'warn' : response.eligibility === 'eligible' ? 'ok' : 'warn',
+        evidence,
+        next: response.next_action,
+        handoff: response.handoff_reason || '',
+        tools: trace.events.filter(event => event.name.includes('tool')).length,
+        policyVersion: response.policy_version || '-',
+        canRequestRefund: response.eligibility === 'eligible' && /申请退款/.test(response.next_action || '')
+      };
+      addMessage('user', text);
+      addMessage('agent', `<span class="label">结论</span><br>${item.title}<br><br><span class="label">依据</span><br>${item.evidence}<br><br><span class="label">下一步</span><br>${item.next}`);
+      updateResult(item, response.trace_id, trace);
+    }
+
+    function respondFallback(text) {
+      const item = pickScenario(text);
+      if (item === scenarios.missing) questionCount += 1;
+      const id = `tr_demo_${String(++seq).padStart(3, '0')}`;
+      addMessage('user', text);
+      const answer = `<span class="label">结论</span><br>${item.title}<br><br><span class="label">依据</span><br>${item.evidence}<br><br><span class="label">下一步</span><br>${item.next}`;
+      addMessage('agent', answer);
+      updateResult(item, id);
+    }
+
+    async function respond(text) {
+      try {
+        const response = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: text,
+            user_id: 'u_001',
+            session_id: sessionId.textContent,
+            mode: 'single_agent',
+            tool_mode: 'local'
+          })
+        });
+        if (!response.ok) throw new Error(`chat request failed: ${response.status}`);
+        renderApiResult(await response.json(), text);
+      } catch (error) {
+        // Opening the HTML file directly has no /chat origin; keep the standalone preview usable.
+        if (window.location.protocol === 'file:') respondFallback(text);
+        else addMessage('agent', `<span class="label">系统提示</span><br>暂时无法连接客服 Agent：${escapeHtml(error.message)}`);
+      }
+    }
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const value = input.value.trim();
+      if (!value) return;
+      respond(value);
+      input.value = '';
+      input.focus();
+    });
+
+    document.querySelector('#refund-button').addEventListener('click', () => {
+      const button = document.querySelector('#refund-button');
+      button.disabled = true;
+      button.textContent = '已生成草稿';
+      document.querySelector('#action-note').textContent = '已生成待人工确认的退款申请草稿，未调用真实退款接口。';
+      addMessage('agent', '<span class="label">申请退款</span><br>已为订单生成待人工确认的退款申请草稿。当前 Demo 不会直接执行退款，客服确认后再处理。');
+      const item = scenarios.normal_unshipped;
+      setTimeline(item, document.querySelector('#trace-id').textContent);
+      timeline.insertAdjacentHTML('beforeend', '<li><span class="point"></span><div><div class="event-title">refund_draft</div><div class="event-detail">生成待人工确认退款草稿（只读模拟）</div></div><span class="event-time">已完成</span></li>');
+    });
+
+    document.querySelectorAll('[data-message]').forEach(button => {
+      button.addEventListener('click', () => {
+        respond(button.dataset.message);
+      });
+    });
+
+    document.querySelector('#reset-btn').addEventListener('click', () => {
+      messages.innerHTML = '<div class="message"><div class="avatar agent">AI</div><div class="bubble"><strong>客服 Agent</strong>您好，我可以帮您查询退款/退货资格。请告诉我订单号，或直接描述您遇到的问题。</div></div>';
+      questionCount = 0;
+      seq = 1;
+      sessionId.textContent = `s-demo-${String(Date.now()).slice(-3)}`;
+      updateResult({ intent: '等待输入', confidence: '-', title: '暂时无法判断', tone: 'warn', evidence: '尚未执行订单、物流、售后查询。', next: '请输入一个演示场景开始。', handoff: '', tools: 0 }, 'tr_demo_001');
+    });
+  </script>
+</body>
+</html>

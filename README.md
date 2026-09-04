@@ -11,7 +11,7 @@ pip install -e '.[dev]'
 uvicorn customer_agent.api:app --reload
 ```
 
-启动后访问 <http://127.0.0.1:8000/docs> 查看 API 文档。
+启动后访问 <http://127.0.0.1:8000/> 查看交互式 Demo，访问 <http://127.0.0.1:8000/docs> 查看 API 文档。
 
 也可以直接运行一条请求：
 
@@ -20,3 +20,5 @@ PYTHONPATH=src python -m customer_agent.cli --user-id u_001 --message "我想问
 ```
 
 当前版本完成票据 01 的基线：统一输入/输出、只读约束、客服请求编排入口和基础 trace。RAG、业务工具、规则决策、短期记忆和 MCP 将在后续票据中接入。
+
+也可以直接双击 `demo.html` 查看前端模拟预览；通过 FastAPI 地址打开时，页面会使用真实的 `/chat` 编排入口。
