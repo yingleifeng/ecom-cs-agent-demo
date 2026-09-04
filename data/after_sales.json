@@ -1,0 +1,6 @@
+[
+  {"order_id": "o_1001", "has_active_case": false, "case_type": null, "case_status": null, "duplicate_request": false, "history_restriction": false},
+  {"order_id": "o_1002", "has_active_case": false, "case_type": null, "case_status": null, "duplicate_request": false, "history_restriction": false},
+  {"order_id": "o_1003", "has_active_case": false, "case_type": null, "case_status": null, "duplicate_request": false, "history_restriction": false},
+  {"order_id": "o_2001", "has_active_case": false, "case_type": null, "case_status": null, "duplicate_request": false, "history_restriction": false}
+]

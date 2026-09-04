@@ -1,0 +1,6 @@
+[
+  {"order_id": "o_1001", "user_id": "u_001", "payment_status": "paid", "order_status": "unshipped", "product_name": "棉麻家居套装", "category": "普通实物", "special_type": null, "ordered_at": "2026-08-30T10:00:00+08:00"},
+  {"order_id": "o_1002", "user_id": "u_001", "payment_status": "paid", "order_status": "shipped", "product_name": "陶瓷马克杯", "category": "普通实物", "special_type": null, "ordered_at": "2026-08-28T10:00:00+08:00"},
+  {"order_id": "o_1003", "user_id": "u_001", "payment_status": "paid", "order_status": "unshipped", "product_name": "定制姓名礼盒", "category": "定制商品", "special_type": "custom", "ordered_at": "2026-08-29T10:00:00+08:00"},
+  {"order_id": "o_2001", "user_id": "u_002", "payment_status": "paid", "order_status": "unshipped", "product_name": "旅行收纳包", "category": "普通实物", "special_type": null, "ordered_at": "2026-08-27T10:00:00+08:00"}
+]

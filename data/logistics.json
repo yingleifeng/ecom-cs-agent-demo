@@ -1,0 +1,6 @@
+[
+  {"order_id": "o_1001", "shipped_at": null, "logistics_status": "not_shipped", "last_updated_at": "2026-08-30T10:00:00+08:00", "signed": false, "exception": false},
+  {"order_id": "o_1002", "shipped_at": "2026-08-30T09:00:00+08:00", "logistics_status": "in_transit", "last_updated_at": "2026-09-01T09:00:00+08:00", "signed": false, "exception": false},
+  {"order_id": "o_1003", "shipped_at": null, "logistics_status": "not_shipped", "last_updated_at": "2026-08-29T10:00:00+08:00", "signed": false, "exception": false},
+  {"order_id": "o_2001", "shipped_at": null, "logistics_status": "not_shipped", "last_updated_at": "2026-08-27T10:00:00+08:00", "signed": false, "exception": false}
+]

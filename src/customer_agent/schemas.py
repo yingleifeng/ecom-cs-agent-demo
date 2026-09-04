@@ -14,6 +14,15 @@ Intent = Literal[
 Eligibility = Literal["eligible", "ineligible", "unknown"]
 RunMode = Literal["single_agent", "multi_agent"]
 ToolMode = Literal["local", "mcp"]
+ToolStatus = Literal[
+    "success",
+    "not_found",
+    "forbidden",
+    "invalid_argument",
+    "timeout",
+    "upstream_error",
+    "data_incomplete",
+]
 
 
 class CustomerRequest(BaseModel):
@@ -29,6 +38,15 @@ class Evidence(BaseModel):
     kind: Literal["none", "policy", "order", "logistics", "after_sales"] = "none"
     summary: str
     source: str | None = None
+
+
+class ToolResult(BaseModel):
+    status: ToolStatus
+    data: dict[str, Any] = Field(default_factory=dict)
+    error_code: str | None = None
+    error_message: str | None = None
+    latency_ms: float = 0.0
+    source: str = "mock_data"
 
 
 class CustomerResponse(BaseModel):

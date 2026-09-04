@@ -1,0 +1,9 @@
+{
+  "policy_version": "policy_v1.0",
+  "rules": [
+    {"id": "RULE-UNSHIPPED-PAID", "when": {"order_status": "unshipped", "payment_status": "paid", "special_type": null, "has_active_case": false}, "eligibility": "eligible", "action": "request_refund"},
+    {"id": "RULE-SHIPPED-NOT-RECEIVED", "when": {"order_status": "shipped", "payment_status": "paid", "logistics_status": "in_transit", "signed": false, "special_type": null, "has_active_case": false}, "eligibility": "eligible", "action": "draft_for_human"},
+    {"id": "RULE-SPECIAL-GOODS", "when": {"special_type": "custom"}, "eligibility": "ineligible", "action": "explain_policy"},
+    {"id": "RULE-INSUFFICIENT-FACTS", "when": {"facts_complete": false}, "eligibility": "unknown", "action": "handoff"}
+  ]
+}
