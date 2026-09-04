@@ -1,0 +1,66 @@
+from typing import Any, Literal
+
+from pydantic import BaseModel, Field
+
+
+Intent = Literal[
+    "refund_eligibility",
+    "refund_request",
+    "exchange_request",
+    "refund_status",
+    "logistics_issue",
+    "unknown",
+]
+Eligibility = Literal["eligible", "ineligible", "unknown"]
+RunMode = Literal["single_agent", "multi_agent"]
+ToolMode = Literal["local", "mcp"]
+
+
+class CustomerRequest(BaseModel):
+    message: str = Field(min_length=1, max_length=4000)
+    user_id: str = Field(min_length=1, max_length=128)
+    session_id: str = Field(min_length=1, max_length=128)
+    order_id: str | None = Field(default=None, max_length=128)
+    mode: RunMode = "single_agent"
+    tool_mode: ToolMode = "local"
+
+
+class Evidence(BaseModel):
+    kind: Literal["none", "policy", "order", "logistics", "after_sales"] = "none"
+    summary: str
+    source: str | None = None
+
+
+class CustomerResponse(BaseModel):
+    intent: Intent = "unknown"
+    intent_confidence: float = Field(default=0.0, ge=0.0, le=1.0)
+    eligibility: Eligibility = "unknown"
+    evidence: list[Evidence] = Field(default_factory=list)
+    policy_version: str | None = None
+    next_action: str
+    need_human: bool = False
+    handoff_reason: str | None = None
+    draft_for_human: str | None = None
+    trace_id: str
+    answer: str
+
+
+class TraceEvent(BaseModel):
+    name: str
+    status: Literal["started", "completed", "skipped", "failed"]
+    detail: dict[str, Any] = Field(default_factory=dict)
+    elapsed_ms: float | None = None
+
+
+class Trace(BaseModel):
+    trace_id: str
+    request: dict[str, Any]
+    response: CustomerResponse | None = None
+    events: list[TraceEvent] = Field(default_factory=list)
+    total_elapsed_ms: float | None = None
+    ttft_ms: float | None = None
+
+
+class AgentResult(BaseModel):
+    response: CustomerResponse
+    trace: Trace

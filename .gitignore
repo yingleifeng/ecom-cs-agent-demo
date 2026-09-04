@@ -8,3 +8,10 @@
 # 常见编辑器临时文件
 *.swp
 *.tmp
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
