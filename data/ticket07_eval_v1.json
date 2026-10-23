@@ -1,0 +1,1471 @@
+{
+  "dataset_id": "ticket07_eval_v1",
+  "version": "1.0",
+  "description": "60条结构化客服评测：30正常、15政策例外、10权限/数据/工具失败、5多轮或情绪升级。",
+  "cases": [
+    {
+      "case_id": "N-01",
+      "category": "normal",
+      "title": "未发货普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-02",
+      "category": "normal",
+      "title": "已发货未签收普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1002 能退款吗",
+          "order_id": "o_1002",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-03",
+      "category": "normal",
+      "title": "未发货普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-04",
+      "category": "normal",
+      "title": "已发货未签收普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1002 能退款吗",
+          "order_id": "o_1002",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-05",
+      "category": "normal",
+      "title": "未发货普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-06",
+      "category": "normal",
+      "title": "已发货未签收普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1002 能退款吗",
+          "order_id": "o_1002",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-07",
+      "category": "normal",
+      "title": "未发货普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-08",
+      "category": "normal",
+      "title": "已发货未签收普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1002 能退款吗",
+          "order_id": "o_1002",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-09",
+      "category": "normal",
+      "title": "未发货普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-10",
+      "category": "normal",
+      "title": "已发货未签收普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1002 能退款吗",
+          "order_id": "o_1002",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-11",
+      "category": "normal",
+      "title": "未发货普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-12",
+      "category": "normal",
+      "title": "已发货未签收普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1002 能退款吗",
+          "order_id": "o_1002",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-13",
+      "category": "normal",
+      "title": "未发货普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-14",
+      "category": "normal",
+      "title": "已发货未签收普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1002 能退款吗",
+          "order_id": "o_1002",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-15",
+      "category": "normal",
+      "title": "未发货普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-16",
+      "category": "normal",
+      "title": "已发货未签收普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1002 能退款吗",
+          "order_id": "o_1002",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-17",
+      "category": "normal",
+      "title": "未发货普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-18",
+      "category": "normal",
+      "title": "已发货未签收普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1002 能退款吗",
+          "order_id": "o_1002",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-19",
+      "category": "normal",
+      "title": "未发货普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-20",
+      "category": "normal",
+      "title": "已发货未签收普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1002 能退款吗",
+          "order_id": "o_1002",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-21",
+      "category": "normal",
+      "title": "未发货普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-22",
+      "category": "normal",
+      "title": "已发货未签收普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1002 能退款吗",
+          "order_id": "o_1002",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-23",
+      "category": "normal",
+      "title": "未发货普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-24",
+      "category": "normal",
+      "title": "已发货未签收普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1002 能退款吗",
+          "order_id": "o_1002",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-25",
+      "category": "normal",
+      "title": "未发货普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-26",
+      "category": "normal",
+      "title": "已发货未签收普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1002 能退款吗",
+          "order_id": "o_1002",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-27",
+      "category": "normal",
+      "title": "未发货普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-28",
+      "category": "normal",
+      "title": "已发货未签收普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1002 能退款吗",
+          "order_id": "o_1002",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-29",
+      "category": "normal",
+      "title": "未发货普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "N-30",
+      "category": "normal",
+      "title": "已发货未签收普通商品",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1002 能退款吗",
+          "order_id": "o_1002",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "普通商品当前物流状态下按 policy_v1.0 判定"
+        }
+      ]
+    },
+    {
+      "case_id": "P-01",
+      "category": "policy_exception",
+      "title": "特殊商品退款规则",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1003 定制礼盒能退款吗",
+          "order_id": "o_1003",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "定制商品需要人工核对，不能套用普通商品规则"
+        }
+      ]
+    },
+    {
+      "case_id": "P-02",
+      "category": "policy_exception",
+      "title": "定制品资格核验",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1003 定制礼盒能退款吗",
+          "order_id": "o_1003",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "定制商品需要人工核对，不能套用普通商品规则"
+        }
+      ]
+    },
+    {
+      "case_id": "P-03",
+      "category": "policy_exception",
+      "title": "定制商品政策例外",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1003 定制礼盒能退款吗",
+          "order_id": "o_1003",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "定制商品需要人工核对，不能套用普通商品规则"
+        }
+      ]
+    },
+    {
+      "case_id": "P-04",
+      "category": "policy_exception",
+      "title": "特殊商品退款规则",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1003 定制礼盒能退款吗",
+          "order_id": "o_1003",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "定制商品需要人工核对，不能套用普通商品规则"
+        }
+      ]
+    },
+    {
+      "case_id": "P-05",
+      "category": "policy_exception",
+      "title": "定制品资格核验",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1003 定制礼盒能退款吗",
+          "order_id": "o_1003",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "定制商品需要人工核对，不能套用普通商品规则"
+        }
+      ]
+    },
+    {
+      "case_id": "P-06",
+      "category": "policy_exception",
+      "title": "定制商品政策例外",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1003 定制礼盒能退款吗",
+          "order_id": "o_1003",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "定制商品需要人工核对，不能套用普通商品规则"
+        }
+      ]
+    },
+    {
+      "case_id": "P-07",
+      "category": "policy_exception",
+      "title": "特殊商品退款规则",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1003 定制礼盒能退款吗",
+          "order_id": "o_1003",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "定制商品需要人工核对，不能套用普通商品规则"
+        }
+      ]
+    },
+    {
+      "case_id": "P-08",
+      "category": "policy_exception",
+      "title": "定制品资格核验",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1003 定制礼盒能退款吗",
+          "order_id": "o_1003",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "定制商品需要人工核对，不能套用普通商品规则"
+        }
+      ]
+    },
+    {
+      "case_id": "P-09",
+      "category": "policy_exception",
+      "title": "定制商品政策例外",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1003 定制礼盒能退款吗",
+          "order_id": "o_1003",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "定制商品需要人工核对，不能套用普通商品规则"
+        }
+      ]
+    },
+    {
+      "case_id": "P-10",
+      "category": "policy_exception",
+      "title": "特殊商品退款规则",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1003 定制礼盒能退款吗",
+          "order_id": "o_1003",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "定制商品需要人工核对，不能套用普通商品规则"
+        }
+      ]
+    },
+    {
+      "case_id": "P-11",
+      "category": "policy_exception",
+      "title": "定制品资格核验",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1003 定制礼盒能退款吗",
+          "order_id": "o_1003",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "定制商品需要人工核对，不能套用普通商品规则"
+        }
+      ]
+    },
+    {
+      "case_id": "P-12",
+      "category": "policy_exception",
+      "title": "定制商品政策例外",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1003 定制礼盒能退款吗",
+          "order_id": "o_1003",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "定制商品需要人工核对，不能套用普通商品规则"
+        }
+      ]
+    },
+    {
+      "case_id": "P-13",
+      "category": "policy_exception",
+      "title": "特殊商品退款规则",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1003 定制礼盒能退款吗",
+          "order_id": "o_1003",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "定制商品需要人工核对，不能套用普通商品规则"
+        }
+      ]
+    },
+    {
+      "case_id": "P-14",
+      "category": "policy_exception",
+      "title": "定制品资格核验",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1003 定制礼盒能退款吗",
+          "order_id": "o_1003",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "定制商品需要人工核对，不能套用普通商品规则"
+        }
+      ]
+    },
+    {
+      "case_id": "P-15",
+      "category": "policy_exception",
+      "title": "定制商品政策例外",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_1003 定制礼盒能退款吗",
+          "order_id": "o_1003",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": true,
+          "reason": "定制商品需要人工核对，不能套用普通商品规则"
+        }
+      ]
+    },
+    {
+      "case_id": "F-01",
+      "category": "permission_data_tool_failure",
+      "title": "越权订单",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_2001 能退款吗",
+          "order_id": "o_2001",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order"
+          ],
+          "handoff": true,
+          "reason": "越权订单"
+        }
+      ]
+    },
+    {
+      "case_id": "F-02",
+      "category": "permission_data_tool_failure",
+      "title": "越权订单物流",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_2001 能退款吗",
+          "order_id": "o_2001",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order"
+          ],
+          "handoff": true,
+          "reason": "越权订单物流"
+        }
+      ]
+    },
+    {
+      "case_id": "F-03",
+      "category": "permission_data_tool_failure",
+      "title": "订单不存在",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_9999 能退款吗",
+          "order_id": "o_9999",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order"
+          ],
+          "handoff": true,
+          "reason": "订单不存在"
+        }
+      ]
+    },
+    {
+      "case_id": "F-04",
+      "category": "permission_data_tool_failure",
+      "title": "错误订单号",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "o_8888 能退款吗",
+          "order_id": "o_8888",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order"
+          ],
+          "handoff": true,
+          "reason": "错误订单号"
+        }
+      ]
+    },
+    {
+      "case_id": "F-05",
+      "category": "permission_data_tool_failure",
+      "title": "订单连续超时",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {
+        "get_order": [
+          "timeout",
+          "timeout"
+        ]
+      },
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order:timeout",
+            "get_order:timeout"
+          ],
+          "handoff": true,
+          "reason": "订单连续超时"
+        }
+      ]
+    },
+    {
+      "case_id": "F-06",
+      "category": "permission_data_tool_failure",
+      "title": "订单连续上游错误",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {
+        "get_order": [
+          "upstream_error",
+          "upstream_error"
+        ]
+      },
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order:upstream_error",
+            "get_order:upstream_error"
+          ],
+          "handoff": true,
+          "reason": "订单连续上游错误"
+        }
+      ]
+    },
+    {
+      "case_id": "F-07",
+      "category": "permission_data_tool_failure",
+      "title": "物流连续超时",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {
+        "get_logistics": [
+          "timeout",
+          "timeout"
+        ]
+      },
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics:timeout",
+            "get_logistics:timeout",
+            "get_after_sales"
+          ],
+          "handoff": true,
+          "reason": "物流连续超时"
+        }
+      ]
+    },
+    {
+      "case_id": "F-08",
+      "category": "permission_data_tool_failure",
+      "title": "售后连续上游错误",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {
+        "get_after_sales": [
+          "upstream_error",
+          "upstream_error"
+        ]
+      },
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales:upstream_error",
+            "get_after_sales:upstream_error"
+          ],
+          "handoff": true,
+          "reason": "售后连续上游错误"
+        }
+      ]
+    },
+    {
+      "case_id": "F-09",
+      "category": "permission_data_tool_failure",
+      "title": "物流数据缺失",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {
+        "get_logistics": [
+          "data_incomplete"
+        ]
+      },
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics:data_incomplete",
+            "get_after_sales"
+          ],
+          "handoff": true,
+          "reason": "物流数据缺失"
+        }
+      ]
+    },
+    {
+      "case_id": "F-10",
+      "category": "permission_data_tool_failure",
+      "title": "售后数据缺失",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {
+        "get_after_sales": [
+          "data_incomplete"
+        ]
+      },
+      "turns": [
+        {
+          "user": "o_1001 能退款吗",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales:data_incomplete"
+          ],
+          "handoff": true,
+          "reason": "售后数据缺失"
+        }
+      ]
+    },
+    {
+      "case_id": "M-01",
+      "category": "multiturn_or_emotion",
+      "title": "两轮无法定位后转人工",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "我的订单能退款吗",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [],
+          "handoff": false,
+          "reason": "首次澄清订单号"
+        },
+        {
+          "user": "我不知道订单号",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [],
+          "handoff": false,
+          "reason": "继续澄清中"
+        },
+        {
+          "user": "还是不知道订单号",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [],
+          "handoff": true,
+          "reason": "两次追问仍无法定位后转人工"
+        }
+      ]
+    },
+    {
+      "case_id": "M-02",
+      "category": "multiturn_or_emotion",
+      "title": "用户明确要求人工",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "别解释了，直接找人工",
+          "intent": "unknown",
+          "eligibility": "unknown",
+          "tools": [],
+          "handoff": true,
+          "reason": "用户明确要求人工"
+        }
+      ]
+    },
+    {
+      "case_id": "M-03",
+      "category": "multiturn_or_emotion",
+      "title": "退款进度情绪升级",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "你们是不是黑我钱，退款一直没到账",
+          "intent": "refund_status",
+          "eligibility": "unknown",
+          "tools": [],
+          "handoff": true,
+          "reason": "资金状态需要人工核实"
+        }
+      ]
+    },
+    {
+      "case_id": "M-04",
+      "category": "multiturn_or_emotion",
+      "title": "多轮补充订单号",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "我想查退款资格",
+          "intent": "refund_eligibility",
+          "eligibility": "unknown",
+          "tools": [],
+          "handoff": false,
+          "reason": "缺少订单号"
+        },
+        {
+          "user": "订单号 o_1001",
+          "order_id": "o_1001",
+          "intent": "refund_eligibility",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "补充订单号后查询完成"
+        }
+      ]
+    },
+    {
+      "case_id": "M-05",
+      "category": "multiturn_or_emotion",
+      "title": "用户撤回申请",
+      "user_id": "u_001",
+      "simulated_data": {},
+      "simulated_failures": {},
+      "turns": [
+        {
+          "user": "帮我申请退款 o_1001",
+          "order_id": "o_1001",
+          "intent": "refund_request",
+          "eligibility": "eligible",
+          "tools": [
+            "get_order",
+            "get_logistics",
+            "get_after_sales",
+            "retrieve_policy"
+          ],
+          "handoff": false,
+          "reason": "只读查询后给出后续动作"
+        },
+        {
+          "user": "算了，先不退了",
+          "intent": "refund_request",
+          "eligibility": "unknown",
+          "tools": [],
+          "handoff": false,
+          "reason": "取消后不再调用工具"
+        }
+      ]
+    }
+  ]
+}

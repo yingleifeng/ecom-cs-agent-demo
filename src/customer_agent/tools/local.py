@@ -31,8 +31,10 @@ class LocalReadOnlyTools:
         if invalid:
             return invalid
         if order_id is None:
-            recent = [item for item in self.orders if item["user_id"] == user_id][:3]
-            return self._result("success", {"orders": [self._redact_order(item) for item in recent]})
+            return self.list_recent_orders(user_id, request_id)
+        return self._authorized_order(user_id, order_id)
+
+    def _authorized_order(self, user_id: str, order_id: str) -> ToolResult:
         matches = [item for item in self.orders if item["order_id"] == order_id]
         if not matches:
             return self._result("not_found", error_code="ORDER_NOT_FOUND")
@@ -41,13 +43,23 @@ class LocalReadOnlyTools:
             return self._result("forbidden", error_code="ORDER_FORBIDDEN")
         return self._result("success", order)
 
+    def list_recent_orders(self, user_id: str, request_id: str) -> ToolResult:
+        """Return only safe summary fields for orders owned by the current user."""
+        if not user_id:
+            return self._result("invalid_argument", error_code="INVALID_ARGUMENT")
+        recent = [item for item in self.orders if item["user_id"] == user_id][:3]
+        return self._result(
+            "success",
+            {"orders": [self._redact_order(item) for item in recent]},
+        )
+
     def get_logistics(self, user_id: str, order_id: str | None, request_id: str) -> ToolResult:
         invalid = self._validate(user_id, order_id)
         if invalid:
             return invalid
         if order_id is None:
             return self._result("invalid_argument", error_code="ORDER_REQUIRED")
-        order_result = self.get_order(user_id, order_id, request_id)
+        order_result = self._authorized_order(user_id, order_id)
         if order_result.status != "success":
             return order_result
         matches = [item for item in self.logistics if item["order_id"] == order_id]
@@ -59,7 +71,7 @@ class LocalReadOnlyTools:
             return invalid
         if order_id is None:
             return self._result("invalid_argument", error_code="ORDER_REQUIRED")
-        order_result = self.get_order(user_id, order_id, request_id)
+        order_result = self._authorized_order(user_id, order_id)
         if order_result.status != "success":
             return order_result
         matches = [item for item in self.after_sales if item["order_id"] == order_id]

@@ -17,7 +17,7 @@ def decide_refund(order: dict[str, Any], logistics: dict[str, Any], after_sales:
     if after_sales.get("has_active_case") or after_sales.get("duplicate_request"):
         return RefundDecision(eligibility="unknown", matched_rule_id="RULE-INSUFFICIENT-FACTS", action="handoff", reason="存在进行中的售后或重复申请")
     if order.get("special_type"):
-        return RefundDecision(eligibility="ineligible", matched_rule_id="RULE-SPECIAL-GOODS", action="explain_policy", reason="商品属于政策特殊例外")
+        return RefundDecision(eligibility="unknown", matched_rule_id="RULE-SPECIAL-GOODS", action="handoff", reason="商品属于政策特殊例外，需要人工核对商品属性和适用政策")
     if order.get("order_status") == "unshipped":
         return RefundDecision(eligibility="eligible", matched_rule_id="RULE-UNSHIPPED-PAID", action="request_refund", reason="已支付、未发货、普通商品且无进行中售后单")
     if order.get("order_status") == "shipped" and not logistics.get("signed") and logistics.get("logistics_status") == "in_transit":

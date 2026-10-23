@@ -15,3 +15,20 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 *.egg-info/
+
+# IDE
+.idea/
+.vscode/
+
+# 敏感配置
+.env
+
+# 运行时生成的文件
+reports/
+issues/
+evals/
+
+# 草稿和待办文档
+待学习验证.md
+电商商家客服AI Agent常见坑调研.md
+场景清单.xlsx

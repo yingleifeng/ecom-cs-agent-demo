@@ -1,0 +1,8 @@
+[
+  {"product_id": "p_001", "product_name": "棉麻家居套装", "category": "普通实物", "special_type": null, "refund_auto_rule": "normal"},
+  {"product_id": "p_002", "product_name": "陶瓷马克杯", "category": "普通实物", "special_type": null, "refund_auto_rule": "normal"},
+  {"product_id": "p_003", "product_name": "定制姓名礼盒", "category": "定制商品", "special_type": "custom", "refund_auto_rule": "excluded"},
+  {"product_id": "p_004", "product_name": "鲜花礼盒", "category": "特殊商品", "special_type": "perishable", "refund_auto_rule": "manual_review"},
+  {"product_id": "p_005", "product_name": "旅行收纳包", "category": "普通实物", "special_type": null, "refund_auto_rule": "normal"},
+  {"product_id": "p_006", "product_name": "贴身衣物", "category": "特殊商品", "special_type": "intimate", "refund_auto_rule": "excluded"}
+]

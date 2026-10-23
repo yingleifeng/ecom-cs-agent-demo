@@ -6,58 +6,33 @@
   <title>商家客服 AI Agent Demo</title>
   <style>
     :root {
-      --ink: #17212b;
-      --muted: #66717d;
-      --line: #d9dee4;
-      --paper: #f5f7f9;
-      --white: #ffffff;
-      --navy: #18324b;
-      --teal: #087f7b;
-      --teal-soft: #e5f4f2;
-      --amber: #9a6810;
-      --amber-soft: #fff5d9;
-      --red: #a63d38;
-      --red-soft: #fbeceb;
-      --shadow: 0 8px 22px rgba(23, 33, 43, .07);
+      --ink: #17212b; --muted: #66717d; --line: #d9dee4; --paper: #f5f7f9;
+      --white: #ffffff; --navy: #18324b; --teal: #087f7b; --teal-soft: #e5f4f2;
+      --amber: #9a6810; --amber-soft: #fff5d9; --red: #a63d38; --red-soft: #fbeceb;
+      --shadow: 0 8px 22px rgba(23,33,43,.07);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     }
-
     * { box-sizing: border-box; }
     body { margin: 0; color: var(--ink); background: var(--paper); }
-    button, input { font: inherit; }
-    button { cursor: pointer; }
-
+    button, input { font: inherit; } button { cursor: pointer; }
     .topbar {
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 28px;
-      color: #fff;
-      background: var(--navy);
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 28px; color: #fff; background: var(--navy);
     }
     .brand { display: flex; align-items: center; gap: 12px; }
-    .brand-mark {
-      width: 30px; height: 30px; display: grid; place-items: center;
-      background: #f0b64f; color: var(--navy); font-weight: 800; border-radius: 6px;
-    }
-    .brand h1 { font-size: 17px; margin: 0; font-weight: 650; letter-spacing: 0; }
+    .brand-mark { width: 30px; height: 30px; display: grid; place-items: center; background: #f0b64f; color: var(--navy); font-weight: 800; border-radius: 6px; }
+    .brand h1 { font-size: 17px; margin: 0; font-weight: 650; }
     .top-meta { display: flex; align-items: center; gap: 16px; color: #d8e2ea; font-size: 13px; }
     .mode { border: 1px solid rgba(255,255,255,.3); padding: 6px 10px; border-radius: 4px; }
-
     .layout {
-      width: min(1480px, calc(100% - 48px));
-      margin: 24px auto;
-      display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(330px, .85fr);
-      gap: 20px;
-      align-items: start;
+      width: min(1480px, calc(100% - 48px)); margin: 24px auto;
+      display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(330px, .85fr);
+      gap: 20px; align-items: start;
     }
     .panel { background: var(--white); border: 1px solid var(--line); box-shadow: var(--shadow); }
     .panel-head { min-height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--line); }
     .panel-head h2 { margin: 0; font-size: 15px; font-weight: 700; }
     .panel-head p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
-
     .chat-panel { min-height: 720px; display: flex; flex-direction: column; }
     .session-bar { display: flex; align-items: center; justify-content: space-between; padding: 10px 18px; background: #fafbfc; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 12px; }
     .session-bar button { border: 0; background: transparent; color: var(--teal); padding: 0; }
@@ -66,7 +41,7 @@
     .message.user { justify-content: flex-end; }
     .avatar { width: 30px; height: 30px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; font-size: 12px; font-weight: 700; }
     .avatar.agent { background: var(--teal-soft); color: var(--teal); }
-    .avatar.user { background: #edf0f3; color: var(--navy); }
+    .avatar.user  { background: #edf0f3; color: var(--navy); }
     .bubble { max-width: min(76%, 570px); padding: 12px 14px; border: 1px solid var(--line); background: #fbfcfd; line-height: 1.65; font-size: 14px; }
     .user .bubble { background: var(--navy); border-color: var(--navy); color: #fff; }
     .bubble strong { display: block; margin-bottom: 3px; font-size: 13px; }
@@ -81,7 +56,6 @@
     .input-row input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(8,127,123,.12); }
     .primary { height: 42px; padding: 0 18px; border: 1px solid var(--teal); border-radius: 4px; background: var(--teal); color: #fff; font-weight: 650; }
     .primary:hover { background: #066d6a; }
-
     .right-column { display: grid; gap: 20px; }
     .result { padding: 18px; }
     .result-status { display: flex; align-items: center; gap: 9px; margin-bottom: 14px; }
@@ -103,8 +77,12 @@
     .handoff { display: none; margin-top: 14px; padding: 12px; background: var(--amber-soft); border: 1px solid #ead59c; color: #654812; font-size: 13px; line-height: 1.6; }
     .handoff.show { display: block; }
     .handoff strong { display: block; margin-bottom: 4px; }
-
     .trace { padding-bottom: 8px; }
+    .trace > summary { cursor: pointer; list-style: none; }
+    .trace > summary::-webkit-details-marker { display: none; }
+    .trace > summary::after { content: '＋'; margin-left: auto; color: var(--teal); }
+    .trace[open] > summary::after { content: '－'; }
+    .trace-meta { padding: 8px 18px 0; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
     .trace-summary { display: flex; gap: 8px; padding: 14px 18px 4px; flex-wrap: wrap; }
     .metric { min-width: 100px; padding: 9px 10px; border: 1px solid var(--line); background: #fafbfc; }
     .metric span { display: block; color: var(--muted); font-size: 11px; }
@@ -117,29 +95,73 @@
     .event-title { font-size: 13px; font-weight: 650; }
     .event-detail { margin-top: 2px; color: var(--muted); font-size: 12px; line-height: 1.5; }
     .event-time { color: var(--muted); font-size: 11px; white-space: nowrap; }
-
     .scenario-panel { padding-bottom: 14px; }
     .scenario-list { display: grid; gap: 8px; padding: 14px 18px 0; }
     .scenario { display: flex; align-items: flex-start; gap: 10px; width: 100%; padding: 10px 11px; border: 1px solid var(--line); background: #fff; text-align: left; }
     .scenario:hover { border-color: var(--teal); background: #f8fcfb; }
     .scenario .tag { display: inline-block; min-width: 52px; color: var(--teal); font-size: 11px; font-weight: 700; }
     .scenario span:last-child { color: var(--ink); font-size: 12px; line-height: 1.45; }
-
     .footnote { width: min(1480px, calc(100% - 48px)); margin: -10px auto 24px; color: var(--muted); font-size: 12px; }
-    @media (max-width: 940px) {
-      .layout { grid-template-columns: 1fr; }
-      .chat-panel { min-height: 660px; }
+
+    /* ── 视角切换 FAB ── */
+    .view-fab {
+      position: fixed; bottom: 24px; right: 24px; z-index: 100;
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-radius: 99px;
+      background: var(--navy); color: #fff; font-size: 12px; font-weight: 600;
+      border: none; box-shadow: 0 4px 16px rgba(23,33,43,.25);
+      cursor: pointer; transition: background .15s;
     }
+    .view-fab:hover { background: #0f2236; }
+    .view-fab .fab-icon { font-size: 15px; }
+    .view-fab .fab-label-cs  { display: none; }
+    .view-fab .fab-label-dev { display: inline; }
+
+    /* ── 客服视角：隐藏开发者专属内容 ── */
+    body.view-cs .dev-only { display: none !important; }
+
+    /* 客服视角下 FAB 文案切换 */
+    body.view-cs .view-fab .fab-label-cs  { display: inline; }
+    body.view-cs .view-fab .fab-label-dev { display: none; }
+
+    /* 客服视角：结果面板标题调整 */
+    body.view-cs #result-panel-title  { /* 通过 JS 切换文字 */ }
+
+    /* 客服视角：AI辅助建议横幅 */
+    .cs-verdict-banner {
+      display: none; margin-bottom: 12px; padding: 10px 14px; border-radius: 4px;
+      font-size: 13px; font-weight: 600; border-left: 4px solid var(--teal);
+      background: var(--teal-soft); color: #054a48;
+    }
+    body.view-cs .cs-verdict-banner { display: block; }
+    .cs-verdict-banner.warn  { border-color: #d08a1d; background: var(--amber-soft); color: #654812; }
+    .cs-verdict-banner.danger{ border-color: var(--red);  background: var(--red-soft);   color: #6b1c1a; }
+
+    /* ── 消费者视角 ── */
+    body.view-consumer .layout { grid-template-columns: 1fr; }
+    body.view-consumer .right-column { display: none !important; }
+    body.view-consumer .chat-panel { min-height: calc(100vh - 130px); }
+    body.view-consumer .dev-info { display: none; }
+    body.view-consumer .suggestions { display: none; }
+    body.view-consumer .consumer-suggestions { display: flex !important; }
+    .consumer-suggestions {
+      display: none; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;
+    }
+    .consumer-suggestions button {
+      padding: 7px 10px; color: var(--navy); background: #f4f6f8;
+      border: 1px solid var(--line); border-radius: 4px; font-size: 12px; text-align: left;
+    }
+    .consumer-suggestions button:hover { border-color: var(--teal); color: var(--teal); }
+
+    @media (max-width: 940px) { .layout { grid-template-columns: 1fr; } .chat-panel { min-height: 660px; } }
     @media (max-width: 560px) {
       .topbar { height: auto; padding: 14px 16px; align-items: flex-start; gap: 12px; }
       .top-meta { display: block; text-align: right; font-size: 11px; }
       .top-meta .mode { margin-top: 5px; }
       .layout, .footnote { width: calc(100% - 24px); margin-top: 12px; }
-      .result-grid { grid-template-columns: 1fr; }
-      .result-block.wide { grid-column: auto; }
-      .bubble { max-width: 86%; }
-      .input-row { flex-direction: column; }
-      .primary { width: 100%; }
+      .result-grid { grid-template-columns: 1fr; } .result-block.wide { grid-column: auto; }
+      .bubble { max-width: 86%; } .input-row { flex-direction: column; } .primary { width: 100%; }
+      .view-fab { bottom: 16px; right: 16px; }
     }
   </style>
 </head>
@@ -151,7 +173,18 @@
     </div>
     <div class="top-meta">
       <span>模拟环境 · 只读</span>
-      <span class="mode">单 Agent / 本地工具</span>
+      <label class="mode" for="agent-mode">Agent 模式
+        <select id="agent-mode" aria-label="Agent 模式">
+          <option value="single_agent">单 Agent</option>
+          <option value="multi_agent">多 Agent</option>
+        </select>
+      </label>
+      <label class="mode" for="tool-mode">工具模式
+        <select id="tool-mode" aria-label="工具模式">
+          <option value="local">本地工具</option>
+          <option value="mcp">MCP</option>
+        </select>
+      </label>
     </div>
   </header>
 
@@ -162,19 +195,16 @@
           <h2>消费者会话</h2>
           <p>咨询未发货或已发货未签收订单的退款/退货资格</p>
         </div>
-        <span class="mode" style="color: var(--teal); border-color: #b8dedb; background: var(--teal-soft);">在线</span>
+        <span class="mode" style="color:var(--teal);border-color:#b8dedb;background:var(--teal-soft);">在线</span>
       </div>
       <div class="session-bar">
-        <span>登录用户：<strong>u_001</strong>　会话：<strong id="session-id">s-demo-001</strong></span>
+        <span class="dev-info">登录用户：<strong>u_001</strong>　会话：<strong id="session-id">s-demo-001</strong></span>
         <button type="button" id="reset-btn">新建会话</button>
       </div>
       <div class="messages" id="messages" aria-live="polite">
         <div class="message">
           <div class="avatar agent">AI</div>
-          <div class="bubble">
-            <strong>客服 Agent</strong>
-            您好，我可以帮您查询退款/退货资格。请告诉我订单号，或直接描述您遇到的问题。
-          </div>
+          <div class="bubble"><strong>客服 Agent</strong>您好，我可以帮您查询退款/退货资格。请告诉我订单号，或直接描述您遇到的问题。</div>
         </div>
       </div>
       <div class="composer">
@@ -184,6 +214,13 @@
           <button type="button" data-message="我想换货，订单号是 o_1001">换货请求</button>
           <button type="button" data-message="帮我查一下订单 o_2001 能不能退">越权订单</button>
           <button type="button" data-message="我没有订单号，但我想退款">缺少订单号</button>
+        </div>
+        <!-- 消费者视角专属快捷语 -->
+        <div class="consumer-suggestions" aria-label="快速发送">
+          <button type="button" data-message="订单还没发货，可以退款吗？订单号是 o_1001">我的订单还没发货，想退款</button>
+          <button type="button" data-message="这单已经发货但还没收到，能退吗？订单号 o_1002">发出来了但我没收到，能退吗</button>
+          <button type="button" data-message="我想换货，订单号是 o_1001">我想换个尺码</button>
+          <button type="button" data-message="我没有订单号，但我想退款">我不知道订单号怎么办</button>
         </div>
         <form class="input-row" id="chat-form">
           <input id="message-input" autocomplete="off" placeholder="例如：订单 o_1001 还没发货，可以退款吗？" aria-label="输入消息">
@@ -196,55 +233,64 @@
       <section class="panel" aria-label="结构化结果">
         <div class="panel-head">
           <div>
-            <h2>结构化结果</h2>
-            <p>消费者回答由以下字段组织</p>
+            <h2 id="result-panel-title">结构化结果</h2>
+            <p id="result-panel-sub">消费者回答由以下字段组织</p>
           </div>
-          <span id="trace-id" style="color: var(--muted); font-size: 11px;">tr_demo_001</span>
         </div>
         <div class="result">
+          <!-- 客服视角：突出显示的操作建议横幅 -->
+          <div class="cs-verdict-banner" id="cs-banner">等待输入……</div>
           <div class="result-status">
             <span class="status-dot" id="status-dot"></span>
             <h3 id="eligibility-title">暂时无法判断</h3>
           </div>
           <div class="result-grid">
-            <div class="result-block"><h4>识别意图</h4><p id="intent-value">等待输入</p></div>
-            <div class="result-block"><h4>置信度</h4><p id="confidence-value">-</p></div>
-            <div class="result-block wide"><h4>依据</h4><p id="evidence-value">尚未执行订单、物流、售后查询。</p></div>
-            <div class="result-block wide"><h4>下一步</h4><p id="next-action">请输入一个演示场景开始。</p></div>
+            <div class="result-block wide"><h4 id="lbl-evidence">依据</h4><p id="evidence-value">尚未执行订单、物流、售后查询。</p></div>
+            <div class="result-block wide"><h4>建议操作</h4><p id="next-action">请输入一个演示场景开始。</p></div>
           </div>
           <div class="action-area" id="action-area">
-            <p id="action-note">该订单符合“已支付、未发货”的退款条件。</p>
+            <p id="action-note">该订单符合"已支付、未发货"的退款条件。</p>
             <button class="refund-button" id="refund-button" type="button">申请退款</button>
           </div>
           <div class="handoff" id="handoff-box">
-            <strong>需要人工接管</strong>
-            <span id="handoff-value"></span>
+            <strong>需要人工接管</strong><span id="handoff-value"></span>
+          </div>
+          <!-- 开发者专属：意图置信度 -->
+          <div class="dev-only" style="margin-top:10px;font-size:12px;color:var(--muted);">
+            意图：<span id="intent-value">等待输入</span>　置信度：<span id="confidence-value">-</span>
           </div>
         </div>
       </section>
 
-      <section class="panel trace" aria-label="Agent trace">
-        <div class="panel-head">
+      <!-- 开发者专属：调试面板 -->
+      <details class="panel trace dev-only" aria-label="商家调试面板">
+        <summary class="panel-head">
           <div>
-            <h2>Agent 执行 Trace</h2>
-            <p>展示本次请求经过的模块和结果</p>
+            <h2>商家调试面板</h2>
+            <p>仅展开后查看意图、检索、工具和规则执行细节</p>
           </div>
-          <span style="color: var(--teal); font-size: 12px;">可观测</span>
-        </div>
+          <span style="color:var(--teal);font-size:12px;">调试信息</span>
+        </summary>
+        <div class="trace-meta">Trace ID：<span id="trace-id">tr_demo_001</span></div>
         <div class="trace-summary">
           <div class="metric"><span>总耗时</span><strong id="latency">-</strong></div>
+          <div class="metric"><span>TTFT</span><strong id="ttft">-</strong></div>
           <div class="metric"><span>追问次数</span><strong id="questions">0 / 2</strong></div>
           <div class="metric"><span>工具调用</span><strong id="tool-count">0</strong></div>
           <div class="metric"><span>政策版本</span><strong id="policy-version">-</strong></div>
+          <div class="metric"><span>Agent 调用 / Token</span><strong id="agent-usage">0 / 0</strong></div>
+          <div class="metric"><span>模型成本</span><strong id="agent-cost">$0.0000</strong></div>
         </div>
         <ol class="timeline" id="timeline">
           <li><span class="point gray"></span><div><div class="event-title">等待请求</div><div class="event-detail">输入消息后显示执行过程</div></div><span class="event-time">-</span></li>
         </ol>
-      </section>
+        <div class="trace-rag" id="rag-results"></div>
+        <div class="trace-rag" id="handoff-summary"></div>
+      </details>
 
       <section class="panel scenario-panel" aria-label="演示场景">
         <div class="panel-head">
-          <div><h2>固定演示路径</h2><p>用于快速体验主链路和异常降级</p></div>
+          <div><h2 id="scenario-panel-title">固定演示路径</h2><p id="scenario-panel-sub">点击任意场景，自动填入并发送对应的消费者消息</p></div>
         </div>
         <div class="scenario-list">
           <button class="scenario" type="button" data-message="订单还没发货，可以退款吗？订单号是 o_1001"><span class="tag">正常</span><span>未发货普通商品：符合退款资格</span></button>
@@ -253,10 +299,20 @@
           <button class="scenario" type="button" data-message="帮我查一下订单 o_2001 能不能退"><span class="tag">安全</span><span>越权订单：拒绝查询并转人工</span></button>
           <button class="scenario" type="button" data-message="我没有订单号，但我想退款"><span class="tag">多轮</span><span>缺少订单号：追问并保留会话状态</span></button>
         </div>
+        <div style="padding:14px 18px;border-top:1px solid var(--line);">
+          <button class="primary dev-only" id="run-eval" type="button">运行 60 条回归验收</button>
+          <p id="eval-status" role="status" style="margin:8px 0 0;color:var(--muted);font-size:12px;" class="dev-only">报告将保存到 reports/ticket10_demo_eval.json</p>
+        </div>
       </section>
     </aside>
   </main>
   <p class="footnote">这是前端模拟原型，不连接真实订单或支付系统；不会执行退款、改单、发券等写操作。</p>
+
+  <!-- 视角切换 FAB（三档循环：开发者 → 客服 → 消费者） -->
+  <button class="view-fab" id="view-toggle" type="button" aria-label="切换视角">
+    <span class="fab-icon">👁</span>
+    <span id="fab-label">切换客服视角</span>
+  </button>
 
   <script>
     const messages = document.querySelector('#messages');
@@ -272,7 +328,7 @@
         match: /o_1001|没发货|未发货/,
         intent: '退款/退货资格咨询', confidence: '0.98', title: '符合退款资格', tone: 'ok',
         evidence: '订单 o_1001：已支付、未发货、普通商品；当前没有进行中的售后单。命中 policy_v1.0 / RULE-UNSHIPPED-PAID。',
-        next: '系统不会直接执行退款。可以为您生成一份待人工确认的售后申请。', handoff: '' , tools: 3
+        next: '系统不会直接执行退款。可以为您生成一份待人工确认的售后申请。', handoff: '', tools: 3
       },
       normal_shipped: {
         match: /o_1002|已发货|没收到|未签收/,
@@ -327,50 +383,108 @@
     }
 
     function escapeHtml(value) {
-      return value.replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char]);
+      return value.replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'})[c]);
+    }
+
+    // 将结构化结果转成自然语言客服回复
+    function toNaturalReply(item) {
+      if (item === scenarios.normal_unshipped) {
+        return '您好！帮您查了一下，这笔订单目前还没发货，符合退款条件 😊 稍后可以为您生成退款申请，经客服确认后即可处理，请稍等~';
+      }
+      if (item === scenarios.normal_shipped) {
+        return '您好！已查询到该订单，商品虽已发出但您尚未签收，符合申请退款的条件 😊 我会为您生成一份售后申请，需要客服进一步确认，请稍等~';
+      }
+      if (item === scenarios.special) {
+        return '您好！您的订单是定制商品，这类商品的退款需要人工客服核实具体情况。帮您转接专属客服，马上会有人为您跟进处理，请稍等 🙏';
+      }
+      if (item === scenarios.forbidden) {
+        return '您好！抱歉，这个订单号查不到您账号名下的记录，无法为您查询。请确认是否使用的是本人账号，如有疑问欢迎联系人工客服帮您核实~';
+      }
+      if (item === scenarios.missing) {
+        return '您好！为您处理退款需要先定位到具体订单。请问能提供一下订单号吗？您也可以在"我的订单"里找到最近的订单号~';
+      }
+      if (item === scenarios.exchange) {
+        return '您好！收到您的换货需求 😊 换货需要人工客服确认库存和处理方式，帮您转接一下，请稍等~';
+      }
+      // unknown fallback
+      return '您好！请问您是需要查询退款资格、退款进度，还是有其他售后问题呢？麻烦说得具体一些，我来帮您处理~';
+    }
+
+    function updateCsBanner(item) {
+      const banner = document.querySelector('#cs-banner');
+      const toneClass = item.tone === 'ok' ? '' : item.tone;
+      banner.className = `cs-verdict-banner ${toneClass}`;
+      const icons = { ok: '✅', warn: '⚠️', danger: '🚫' };
+      const icon = icons[item.tone] || '⚠️';
+      banner.textContent = `${icon} ${item.title} — ${item.next}`;
     }
 
     function setTimeline(item, id, trace = null) {
       const events = trace?.events?.length
-        ? trace.events.map(event => [event.name, event.detail?.reason || event.detail?.mode || event.status, event.status === 'failed' ? 'failed' : event.status])
+        ? trace.events.map(event => {
+          const detail = event.detail || {};
+          const args = detail.arguments ? `参数：${JSON.stringify(detail.arguments)}` : '';
+          const state = detail.state || {};
+          const reason = detail.reason || detail.rule_id || detail.mode || detail.status || (
+            event.name === 'session_state'
+              ? `订单追问 ${state.clarification_count || 0} 次；意图澄清 ${state.intent_clarification_count || 0} 次`
+              : '');
+          const latency = event.elapsed_ms ?? detail.latency_ms;
+          const summary = [reason, args, detail.error_code ? `错误码：${detail.error_code}` : '', detail.retrying ? '将重试' : ''].filter(Boolean).join('；');
+          return [event.name, summary, event.status === 'failed' ? 'failed' : event.status, latency];
+        })
         : [
-          ['orchestration', '接收请求并读取当前会话', 'completed'],
-          ['intent_classification', `意图：${item.intent}；置信度 ${item.confidence}`, 'completed'],
+          ['orchestration', '接收请求并读取当前会话', 'completed', null],
+          ['intent_classification', `意图：${item.intent}；置信度 ${item.confidence}`, 'completed', null],
         ];
       if (!trace) {
-        if (item.tools > 0) {
-          events.push(['auth_check', item.tone === 'danger' ? 'user_id + order_id 校验失败：forbidden' : 'user_id + order_id 校验通过', item.tone === 'danger' ? 'failed' : 'completed']);
-        }
-        if (item.tools > 0 && item.tone !== 'danger') events.push(['policy_retrieval', '命中 policy_v1.0 及对应规则条款', 'completed']);
-        if (item.tools > 0 && item.tone !== 'danger') events.push(['read_only_tools', `查订单、查物流、查售后：${item.tools} 次只读调用`, 'completed']);
-        events.push(['response_rendering', item.handoff ? '生成消费者回答与人工交接摘要' : '生成结论—依据—下一步回答', 'completed']);
+        if (item.tools > 0) events.push(['auth_check', item.tone === 'danger' ? '订单归属校验失败' : '订单归属校验通过', item.tone === 'danger' ? 'failed' : 'completed', null]);
+        if (item.tools > 0 && item.tone !== 'danger') events.push(['policy_retrieval', '命中政策条款', 'completed', null]);
+        if (item.tools > 0 && item.tone !== 'danger') events.push(['read_only_tools', `查订单、查物流、查售后：${item.tools} 次只读调用`, 'completed', null]);
+        events.push(['response_rendering', item.handoff ? '生成消费者回答与人工交接摘要' : '生成结论—依据—下一步回答', 'completed', null]);
       }
-      timeline.innerHTML = events.map(([name, detail, status], index) => `<li><span class="point ${status === 'failed' ? 'gray' : ''}"></span><div><div class="event-title">${name}</div><div class="event-detail">${detail}</div></div><span class="event-time">${index === 0 ? '0ms' : `${index * 42 + 18}ms`}</span></li>`).join('');
+      timeline.innerHTML = events.map(([name, detail, status, elapsed], index) =>
+        `<li><span class="point ${status === 'failed' ? 'gray' : ''}"></span><div><div class="event-title">${escapeHtml(String(name))}</div><div class="event-detail">${escapeHtml(String(detail || status || ''))}</div></div><span class="event-time">${elapsed != null ? `${escapeHtml(String(elapsed))}ms` : index === 0 ? '0ms' : `${index * 42 + 18}ms`}</span></li>`
+      ).join('');
       document.querySelector('#trace-id').textContent = id;
       document.querySelector('#latency').textContent = trace?.total_elapsed_ms != null ? `${trace.total_elapsed_ms} ms` : `${events.length * 42 + 18} ms`;
-      const toolEvents = trace?.events?.filter(event => event.name.includes('tool')) || [];
+      document.querySelector('#ttft').textContent = trace?.ttft_ms != null ? `${trace.ttft_ms} ms` : '-';
+      const toolEvents = trace?.events?.filter(e => e.name.includes('tool')) || [];
       document.querySelector('#tool-count').textContent = trace ? toolEvents.length : item.tools;
       document.querySelector('#policy-version').textContent = item.policyVersion || (trace ? '-' : item.tools > 0 && item.tone !== 'danger' ? 'v1.0' : '-');
+      const agentSummary = trace?.events?.find(e => e.name === 'agent_orchestration' && e.status === 'completed')?.detail;
+      document.querySelector('#agent-usage').textContent = agentSummary ? `${agentSummary.agent_invocations} / ${agentSummary.token_usage} tokens` : '0 / 0';
+      document.querySelector('#agent-cost').textContent = `$${Number(agentSummary?.estimated_cost_usd || 0).toFixed(4)}`;
+      const sessionEvent = trace?.events?.find(e => e.name === 'session_state');
+      const state = sessionEvent?.detail?.state || {};
+      document.querySelector('#questions').textContent = trace
+        ? `${state.clarification_count || 0} / 2（意图澄清 ${state.intent_clarification_count || 0} 次）`
+        : `${questionCount} / 2`;
+      const policyEvent = trace?.events?.find(e => e.name === 'policy_retrieval');
+      const hits = policyEvent?.detail?.results || [];
+      document.querySelector('#rag-results').innerHTML = hits.length
+        ? `<h3>RAG 命中片段</h3>${hits.map(h => `<div class="event-detail">#${escapeHtml(String(h.rank ?? '-'))} · ${escapeHtml(String(h.source || ''))} · score ${escapeHtml(String(h.score ?? '-'))}<br>${escapeHtml(String(h.snippet || ''))}</div>`).join('')}` : '';
+      const draft = trace?.response?.draft_for_human;
+      document.querySelector('#handoff-summary').innerHTML = draft
+        ? `<h3>人工交接摘要</h3><pre class="event-detail" style="white-space:pre-wrap;font:inherit;">${escapeHtml(String(draft))}</pre>` : '';
     }
 
     function updateResult(item, id, trace = null) {
-      const title = document.querySelector('#eligibility-title');
+      document.querySelector('#eligibility-title').textContent = item.title;
       const dot = document.querySelector('#status-dot');
-      title.textContent = item.title;
       dot.className = `status-dot ${item.tone === 'warn' ? 'warn' : item.tone === 'danger' ? 'danger' : ''}`;
       document.querySelector('#intent-value').textContent = item.intent;
       document.querySelector('#confidence-value').textContent = item.confidence;
       document.querySelector('#evidence-value').textContent = item.evidence;
       document.querySelector('#next-action').textContent = item.next;
-      const actionArea = document.querySelector('#action-area');
-      const refundButton = document.querySelector('#refund-button');
-      const canRequestRefund = item.canRequestRefund === true || item === scenarios.normal_unshipped;
-      actionArea.classList.toggle('show', canRequestRefund);
-      refundButton.disabled = false;
-      refundButton.textContent = '申请退款';
+      const canRefund = item.canRequestRefund === true || item === scenarios.normal_unshipped;
+      document.querySelector('#action-area').classList.toggle('show', canRefund);
+      const refundBtn = document.querySelector('#refund-button');
+      refundBtn.disabled = false; refundBtn.textContent = '申请退款';
       document.querySelector('#handoff-box').classList.toggle('show', Boolean(item.handoff));
-      document.querySelector('#handoff-value').textContent = item.handoff;
+      document.querySelector('#handoff-value').textContent = item.handoff ? '已为您转接人工客服继续核实。' : '';
       document.querySelector('#questions').textContent = `${questionCount} / 2`;
+      updateCsBanner(item);
       setTimeline(item, id, trace);
     }
 
@@ -378,22 +492,21 @@
       const response = result.response;
       const trace = result.trace;
       const evidence = response.evidence?.length
-        ? response.evidence.map(item => item.summary).join('；')
+        ? response.evidence.map(i => i.summary).join('；')
         : '当前基础版本尚未接入业务事实查询。';
       const item = {
-        intent: response.intent,
-        confidence: response.intent_confidence,
+        intent: response.intent, confidence: response.intent_confidence,
         title: response.eligibility === 'eligible' ? '符合退款资格' : response.eligibility === 'ineligible' ? '不符合退款资格' : '暂时无法判断',
         tone: response.need_human ? 'warn' : response.eligibility === 'eligible' ? 'ok' : 'warn',
-        evidence,
-        next: response.next_action,
-        handoff: response.handoff_reason || '',
-        tools: trace.events.filter(event => event.name.includes('tool')).length,
+        evidence, next: response.next_action, handoff: response.handoff_reason || '',
+        tools: trace.events.filter(e => e.name.includes('tool')).length,
         policyVersion: response.policy_version || '-',
         canRequestRefund: response.eligibility === 'eligible' && /申请退款/.test(response.next_action || '')
       };
       addMessage('user', text);
-      addMessage('agent', `<span class="label">结论</span><br>${item.title}<br><br><span class="label">依据</span><br>${item.evidence}<br><br><span class="label">下一步</span><br>${item.next}`);
+      // 优先使用 API 返回的 answer 字段（自然语言），fallback 到结构化渲染
+      const replyText = response.answer || `${item.title}。${item.evidence} ${item.next}`;
+      addMessage('agent', escapeHtml(replyText).replace(/\n/g, '<br>'));
       updateResult(item, response.trace_id, trace);
     }
 
@@ -402,66 +515,113 @@
       if (item === scenarios.missing) questionCount += 1;
       const id = `tr_demo_${String(++seq).padStart(3, '0')}`;
       addMessage('user', text);
-      const answer = `<span class="label">结论</span><br>${item.title}<br><br><span class="label">依据</span><br>${item.evidence}<br><br><span class="label">下一步</span><br>${item.next}`;
-      addMessage('agent', answer);
+      addMessage('agent', escapeHtml(toNaturalReply(item)));
       updateResult(item, id);
     }
 
     async function respond(text) {
       try {
-        const response = await fetch('/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            message: text,
-            user_id: 'u_001',
-            session_id: sessionId.textContent,
-            mode: 'single_agent',
-            tool_mode: 'local'
-          })
+        const res = await fetch('/chat', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text, user_id: 'u_001', session_id: sessionId.textContent,
+            mode: document.querySelector('#agent-mode').value, tool_mode: document.querySelector('#tool-mode').value })
         });
-        if (!response.ok) throw new Error(`chat request failed: ${response.status}`);
-        renderApiResult(await response.json(), text);
-      } catch (error) {
-        // Opening the HTML file directly has no /chat origin; keep the standalone preview usable.
+        if (!res.ok) throw new Error(`chat failed: ${res.status}`);
+        renderApiResult(await res.json(), text);
+      } catch {
         if (window.location.protocol === 'file:') respondFallback(text);
-        else addMessage('agent', `<span class="label">系统提示</span><br>暂时无法连接客服 Agent：${escapeHtml(error.message)}`);
+        else addMessage('agent', '<span class="label">系统提示</span><br>暂时无法处理请求，请稍后重试或联系人工客服。');
       }
     }
 
-    form.addEventListener('submit', event => {
-      event.preventDefault();
-      const value = input.value.trim();
-      if (!value) return;
-      respond(value);
-      input.value = '';
-      input.focus();
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const v = input.value.trim();
+      if (!v) return;
+      respond(v); input.value = ''; input.focus();
     });
 
     document.querySelector('#refund-button').addEventListener('click', () => {
-      const button = document.querySelector('#refund-button');
-      button.disabled = true;
-      button.textContent = '已生成草稿';
+      const btn = document.querySelector('#refund-button');
+      btn.disabled = true; btn.textContent = '已生成草稿';
       document.querySelector('#action-note').textContent = '已生成待人工确认的退款申请草稿，未调用真实退款接口。';
       addMessage('agent', '<span class="label">申请退款</span><br>已为订单生成待人工确认的退款申请草稿。当前 Demo 不会直接执行退款，客服确认后再处理。');
-      const item = scenarios.normal_unshipped;
-      setTimeline(item, document.querySelector('#trace-id').textContent);
+      setTimeline(scenarios.normal_unshipped, document.querySelector('#trace-id').textContent);
       timeline.insertAdjacentHTML('beforeend', '<li><span class="point"></span><div><div class="event-title">refund_draft</div><div class="event-detail">生成待人工确认退款草稿（只读模拟）</div></div><span class="event-time">已完成</span></li>');
     });
 
-    document.querySelectorAll('[data-message]').forEach(button => {
-      button.addEventListener('click', () => {
-        respond(button.dataset.message);
-      });
+    document.querySelectorAll('[data-message]').forEach(btn => {
+      btn.addEventListener('click', () => respond(btn.dataset.message));
+    });
+
+    document.querySelector('#run-eval').addEventListener('click', async e => {
+      const btn = e.currentTarget;
+      const status = document.querySelector('#eval-status');
+      btn.disabled = true; status.textContent = '正在运行 60 条结构化评测…';
+      try {
+        const res = await fetch('/evaluate/ticket07', { method: 'POST' });
+        if (!res.ok) throw new Error('评测暂时不可用');
+        const result = await res.json();
+        const s = result.summary;
+        status.textContent = `完成：${s.case_count} 案例 / ${s.turn_count} 轮；意图 ${(s.intent_accuracy * 100).toFixed(1)}%；错误资格结论 ${s.incorrect_eligibility_conclusions}；${result.report}`;
+      } catch {
+        status.textContent = '评测未能运行，请查看服务器日志或使用 README 中的命令。';
+      } finally { btn.disabled = false; }
     });
 
     document.querySelector('#reset-btn').addEventListener('click', () => {
       messages.innerHTML = '<div class="message"><div class="avatar agent">AI</div><div class="bubble"><strong>客服 Agent</strong>您好，我可以帮您查询退款/退货资格。请告诉我订单号，或直接描述您遇到的问题。</div></div>';
-      questionCount = 0;
-      seq = 1;
+      questionCount = 0; seq = 1;
       sessionId.textContent = `s-demo-${String(Date.now()).slice(-3)}`;
       updateResult({ intent: '等待输入', confidence: '-', title: '暂时无法判断', tone: 'warn', evidence: '尚未执行订单、物流、售后查询。', next: '请输入一个演示场景开始。', handoff: '', tools: 0 }, 'tr_demo_001');
+    });
+
+    // ── 视角切换（三档循环：dev → cs → consumer → dev） ──
+    const viewToggle = document.querySelector('#view-toggle');
+    const fabLabel    = document.querySelector('#fab-label');
+    const resultTitle = document.querySelector('#result-panel-title');
+    const resultSub   = document.querySelector('#result-panel-sub');
+    const lblEvidence = document.querySelector('#lbl-evidence');
+    const chatPanelHead = document.querySelector('.chat-panel .panel-head h2');
+    const scenarioPanelTitle = document.querySelector('#scenario-panel-title');
+    const scenarioPanelSub   = document.querySelector('#scenario-panel-sub');
+
+    // 视角顺序：dev → cs → consumer
+    const VIEWS = ['dev', 'cs', 'consumer'];
+    let currentView = 0; // starts at dev
+
+    function applyView(view) {
+      document.body.classList.remove('view-cs', 'view-consumer');
+      if (view === 'cs') {
+        document.body.classList.add('view-cs');
+        fabLabel.textContent = '切换消费者视角';
+        resultTitle.textContent = 'AI 辅助建议';
+        resultSub.textContent   = '当前订单退款资格与建议操作';
+        lblEvidence.textContent = '查到的订单信息';
+        chatPanelHead.textContent = '消费者会话';
+        scenarioPanelTitle.textContent = '快速场景测试';
+        scenarioPanelSub.textContent   = '点击场景快速模拟一条消费者消息';
+      } else if (view === 'consumer') {
+        document.body.classList.add('view-consumer');
+        fabLabel.textContent = '切换开发者视角';
+        chatPanelHead.textContent = '在线客服';
+      } else {
+        // dev
+        fabLabel.textContent = '切换客服视角';
+        resultTitle.textContent = '结构化结果';
+        resultSub.textContent   = '消费者回答由以下字段组织';
+        lblEvidence.textContent = '依据';
+        chatPanelHead.textContent = '消费者会话';
+        scenarioPanelTitle.textContent = '固定演示路径';
+        scenarioPanelSub.textContent   = '点击任意场景，自动填入并发送对应的消费者消息';
+      }
+    }
+
+    viewToggle.addEventListener('click', () => {
+      currentView = (currentView + 1) % VIEWS.length;
+      applyView(VIEWS[currentView]);
     });
   </script>
 </body>
 </html>
+
